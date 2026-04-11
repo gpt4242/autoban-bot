@@ -1,0 +1,6 @@
+.env
+banned_users.txt
+__pycache__/
+*.pyc
+*.pyo
+*.db
