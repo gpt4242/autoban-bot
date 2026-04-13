@@ -38,7 +38,6 @@ load_dotenv()
 # ============ НАСТРОЙКИ ============
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 CHANNEL_ID = os.getenv("CHANNEL_ID")
-TARGET_CHAT_ID = os.getenv("TARGET_CHAT_ID")
 ADMIN_ID = int(os.getenv("ADMIN_ID"))
 WEB_HOST = os.getenv("WEB_HOST", "0.0.0.0")
 WEB_PORT = int(os.getenv("WEB_PORT", 8080))
@@ -111,7 +110,7 @@ async def _ban_user(user_id, reason="Ручной бан"):
     try:
         add_banned(user_id, reason=reason)
         await bot.ban_chat_member(
-            chat_id=TARGET_CHAT_ID,
+            chat_id=CHANNEL_ID,
             user_id=user_id,
             until_date=int((datetime.now() + timedelta(days=365)).timestamp())
         )
@@ -730,7 +729,6 @@ async def main():
     logger.info("=" * 50)
     logger.info("🤖 Автобан бот — полная версия")
     logger.info(f"Канал: {CHANNEL_ID}")
-    logger.info(f"Бан в: {TARGET_CHAT_ID}")
     logger.info(f"Админ: {ADMIN_ID}")
     logger.info("=" * 50)
 
